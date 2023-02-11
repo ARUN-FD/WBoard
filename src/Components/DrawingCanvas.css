@@ -1,0 +1,79 @@
+.whiteboard-body{
+    /* border: 1px solid #000; */
+    height: 895px;
+    width: 100%;
+    display: flex;
+}
+
+.buttons-body-one{
+    /* border: 1px solid #000; */
+    height: 895px;
+    width: 4%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: rgb(235, 233, 233);
+}
+
+.buttons-parent{
+    /* border: 1px solid #000; */
+    height: 5vh;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    background-color: rgb(235, 233, 233);
+}
+
+.whiteboard-headings{
+    /* border: 1px solid #000; */
+    height: 895px;
+    /* width: 90%; */
+    width: 92%;
+    display: flex;
+    flex-direction: column;
+    
+    
+}
+
+.headingss{
+    /* border: 1px solid #000; */
+    height: 65px;
+    /* width: 95%; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: Georgia, serif;
+    font-size: xx-large;
+    font-weight: bolder;
+    background-color: rgb(235, 233, 233);
+}
+
+/* .canvass{ */
+    /* border: 1px solid #000 ; */
+    /* height: 760px; */
+    /* width: 95%; */
+/* } */
+
+.color-picker{
+    width: 45%;
+}
+
+.buttons-body-two{
+    /* border: 1px solid #000; */
+    width: 4%;
+    background-color: rgb(235, 233, 233);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.footer{
+    /* border: 1px solid #000; */
+    height: 70px;
+    background-color: rgb(235, 233, 233);
+    
+}
