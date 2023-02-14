@@ -69,16 +69,18 @@ const Canvas = ({
     }
     elements.forEach((ele, i) => {
       if (ele.element === "rect") {
+        const canvas = canvasRef.current;
+        const ctx = canvas.getContext("2d");
+        ctx.beginPath();
+        ctx.moveTo(ele.offsetX-(ele.width/2), ele.offsetY);
+        ctx.lineTo(ele.offsetX-(ele.width/2), ele.offsetY+ele.height);
+        ctx.lineTo(ele.offsetX+(ele.width/2), ele.offsetY+ele.height);
+        ctx.lineTo(ele.offsetX+(ele.width/2), ele.offsetY);
+        ctx.closePath();
+        ctx.stroke();
+      } else if(ele.element === "circle") {
         roughCanvas.draw(
-          generator.rectangle(ele.offsetX, ele.offsetY, ele.width, ele.height, {
-            stroke: ele.stroke,
-            roughness: 0,
-            strokeWidth: 5,
-          })
-        );
-      } else if(ele.element === "triangle") {
-        roughCanvas.draw(
-          generator.triangle(ele.offsetX,ele.offsetY, ele.width,ele.height,{
+          generator.ellipse(ele.offsetX,ele.offsetY, ele.width,ele.height,{
             stroke:ele.stroke,
             roughness: 0,
             strokeWidth: 5,
@@ -98,19 +100,28 @@ const Canvas = ({
           roughness: 0,
           strokeWidth: 5,
         });
-      } else if (ele.element === "circle") {
+      } else if (ele.element === "circle1") {
         roughCanvas.draw(
-          generator.line(ele.offsetX,ele.offsetY,ele.width,ele.height, {
-          stroke: ele.stroke,
-          roughness: 0,
-          strokeWidth: 5,
-        })
+          generator.circle(ele.offsetX, ele.offsetY, ele.width, ele.height, {
+            stroke: ele.stroke,
+            roughness: 0,
+            strokeWidth: 5,
+          })
         );
+      }else if(ele.element === "triangle") {
+        const canvas = canvasRef.current;
+        const ctx = canvas.getContext("2d");
+        ctx.beginPath();
+        ctx.moveTo(ele.offsetX, ele.offsetY);
+        ctx.lineTo(ele.offsetX-(ele.width/2), ele.offsetY+ele.height);
+        ctx.lineTo(ele.offsetX+(ele.width/2), ele.offsetY+ele.height);
+        ctx.closePath();
+        ctx.stroke();
       }
     });
     const canvasImage = canvasRef.current.toDataURL();
     socket.emit("drawing", canvasImage);
-  }, [elements]);
+  });
 
   const handleMouseMove = (e) => {
     if (!isDrawing) {
@@ -168,11 +179,12 @@ const Canvas = ({
         prevElements.map((ele, index) =>
           index === elements.length - 1
             ? {
-                offsetX: ele.offsetX,
-                offsetY: ele.offsetY,
-                path: [...ele.path, [offsetX, offsetY]],
-                stroke: ele.stroke,
-                element: ele.element,
+              offsetX: ele.offsetX,
+              offsetY: ele.offsetY,
+              width: offsetX - ele.offsetX,
+              height: offsetY - ele.offsetY,
+              stroke: ele.stroke,
+              element: ele.element,
               }
             : ele
         )
@@ -183,11 +195,12 @@ const Canvas = ({
       prevElements.map((ele, index) =>
         index === elements.length - 1
           ? {
-              offsetX: ele.offsetX,
-              offsetY: ele.offsetY,
-              path: [...ele.path, [offsetX, offsetY]],
-              stroke: ele.stroke,
-              element: ele.element,
+            offsetX: ele.offsetX,
+            offsetY: ele.offsetY,
+            width: offsetX - ele.offsetX,
+            height: offsetY - ele.offsetY,
+            stroke: ele.stroke,
+            element: ele.element,
             }
           : ele
       )
