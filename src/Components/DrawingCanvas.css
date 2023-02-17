@@ -77,3 +77,32 @@
     background-color: rgb(235, 233, 233);
     
 }
+.buttons-plus{
+    height: 5vh;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    background-color: rgb(235, 233, 233);
+    position: relative;
+    /* display: inline-block; */
+}
+.buttons-plus .buttons-range {
+    visibility: hidden;
+    width: 140px;
+    height: 30px;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    background-color: #000;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    left: -140px;
+    position: absolute;
+    z-index: 1;
+  }
+  .buttons-plus:hover .buttons-range {
+    visibility: visible;
+  }
